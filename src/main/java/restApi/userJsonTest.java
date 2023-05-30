@@ -79,7 +79,7 @@ public class userJsonTest {
         ;
         }
         @Test
-    public void deveVerificarLista(){
+        public void deveVerificarLista(){
             RestAssured.given()
                     .when()
                     .get("https://restapi.wcaquino.me/users")
@@ -92,5 +92,16 @@ public class userJsonTest {
                     .body("salary", Matchers.contains(1234.5677f, 2500, null))
                     ;
         }
+        @Test
+    public void validaUsuario(){
+        RestAssured.given()
+                .when()
+                .get("https://reqres.in/api/users?page=2")
+                .then()
+                .statusCode(200)
+                .body("data.id[0]", Matchers.is(7))
+                .body("data.email[0]", Matchers.is("michael.lawson@reqres.in"));
+        }
+
     }
 
